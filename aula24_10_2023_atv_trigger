@@ -1,0 +1,10 @@
+DELIMITER //
+CREATE TRIGGER after_insert_clientes
+AFTER INSERT ON Clientes
+FOR EACH ROW
+BEGIN
+    INSERT INTO Auditoria (mensagem, data_hora)
+    VALUES (CONCAT('Cliente adicionado: ', NEW.nome), NOW());
+END;
+//
+DELIMITER ;
